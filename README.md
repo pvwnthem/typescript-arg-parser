@@ -1,6 +1,6 @@
 # ts-argparser
 
-
+[ya](https://img.shields.io/npm/v/ts-argparser)
 Cli argument parser for typescript
 
 ## Installing and Importing
