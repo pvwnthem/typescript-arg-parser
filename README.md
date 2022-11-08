@@ -29,19 +29,21 @@ if you want the flag to take in data, you should specify what data it takes in h
 EX: "host: number"
 
 
+### wantsData !!!IMPORTANT!!!
+if you want the data after the flag to be passed into your option as a parameter, you should specify wantsData as true
+
+
 ```javascript
     {
-    // name of the option
-    name: "help",
-    // aliases for the option
+        name: "test",
         aliases: [
-            "-h", "--help"
+            "-test", "--test"
         ],
-        // description of the option
-        description: "Display this help message.",
-        // the action to execute when the option is present
-        action: actions.help
-        
+        action: actions.method,
+        description: "test",
+        args: "test: string",
+        wantsData: true,
+        type: "nf"
     }
 ```
 
@@ -82,6 +84,7 @@ EX: "host: number"
         action: actions.method,
         description: "test",
         args: "test: string",
+        wantsData: true,
         type: "nf"
     }
     
