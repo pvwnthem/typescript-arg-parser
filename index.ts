@@ -1,4 +1,4 @@
-
+'use strict';
 // initialize argv
 const argv = process.argv
 // imports
