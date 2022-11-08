@@ -6,13 +6,13 @@ Cli argument parser for typescript
 ## Installing and Importing
 
 ```javascript
-    npm i ts-argparse
+    npm i ts-argparser
             OR
     bun i ts-argparse
 ```
 
 ```javascript
-    import argparse from 'ts-argparse'
+    import argparse from 'ts-argparser'
     import color from 'sscolors'
 ```
 
