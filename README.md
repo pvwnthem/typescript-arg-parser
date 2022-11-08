@@ -31,7 +31,7 @@ EX: "host: number"
 
 ### wantsData !!!IMPORTANT!!!
 if you want the data after the flag to be passed into your option as a parameter, you should specify wantsData as true
-
+##### you should also allow the action function to take in a parameter with a type of any to be able to acsess this data, not doing so may result in an error
 
 ```javascript
     {
