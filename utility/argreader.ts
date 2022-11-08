@@ -7,8 +7,7 @@ import color from 'sscolors'
 
 import fs from 'fs'
 // open package.json and decode it
-const pack = fs.readFileSync('package.json')
-const decoded = JSON.parse(Buffer.from(pack).toString('utf8'))
+
 // import icons
 import logSymbols from './icons'
 
@@ -19,98 +18,10 @@ const failed = logSymbols.error
 
 
 // setup action function class
-class actions {
-    static help() {
-        optionDefinitions.forEach((arg) => {
-            if (arg) {
-                if(arg.args) {
-                    console.log(
-                        color.bold(
-                            
-                            `${color.magenta(arg.name)}, ${color.green('takes arguments')}- ${color.cyan(arg.args)}`
-                            
-                        ),
-                        color.underline(
-                            ` ${arg.description}`
-                        )
-                    )
-                } else {
-                    console.log(
-                        color.bold(
-                            `${color.magenta(arg.name)}, ${color.red('takes no arguments')}`
-                        ),
-                        color.underline(
-                            ` ${arg.description}`
-                        )
-                    )
-                }
-            
-            }
-        })
 
-    }
-    static version() {
-        console.log(color.bold(color.blue(success + ` Strap version ${color.italic(color.magenta(decoded.version))}`)))
-        console.log(color.bold(color.blue(success + ` Node version ${color.italic(color.magenta(process.version))}`)))
-        if (JSON.stringify(process.versions).includes('bun')) {
-            console.log(color.bold(color.blue(success + ` Bun version ${color.italic(color.magenta(process.versions.bun))}`)))
-        } else {
-            console.log(color.bold(color.blue(failed + ` Bun Not Installed 😔`)))
-        }
-    }
-    static method() {
-
-    }
-}
 
 // setup argument options
-const optionDefinitions = 
-[
-    
-   {
-    // name of the option
-    name: "help",
-    // aliases for the option
-        aliases: [
-            "-h", "--help"
-        ],
-        // description of the option
-        description: "Display this help message.",
-        // the action to execute when the option is present
-        action: actions.help
-        
-    },
-    {
-        name: "version",
-        aliases: [
-            "-v", "--version"
-        ], 
-        description: "Display the version of Strap.",
-        action: actions.version
-        
-    },
-    {
-        name: "method",
-        aliases: [
-            "-m", "--method"
-        ],
-        action: actions.method,
-        description: "Display the method of Strap.",
-        args: "test: string",
-        type: "nf"
-    },
-    {
-        name: "x",
-        aliases: [
-            "-x", "--x"
-        ],
-        action: actions.method,
-        description: "Display the method of Strap.",
-        args: "test: string",
-        type: "nf"
-    }
-    
-]
+
 
 //handleArg function
 const handleArg = (arg: any, index:any) => {
@@ -139,7 +50,7 @@ const handleArg = (arg: any, index:any) => {
 
 // take the list of argvs and remove the default node args, seperating only the user args
 let argc = argv.splice(2, argv.length)
-const commandLineArgs = () => {
+export const argparse = (optionDefinitions: any) => {
     // if there is more than one argument
     if (argc.length > 1) {
         // for each args
@@ -190,4 +101,3 @@ const commandLineArgs = () => {
 
 
 // execute the function
-commandLineArgs()
