@@ -3,6 +3,19 @@
 
 Cli argument parser for typescript
 
+## Installing and Importing
+
+```javascript
+    npm i ts-argparse
+            OR
+    bun i ts-argparse
+```
+
+```javascript
+    import argparse from 'ts-argparse'
+    import color from 'sscolors'
+```
+
 ### option definitions should contain a list of objects, each of which represents a flag for the parser
 
 #### Option structure
