@@ -1,0 +1,15 @@
+{
+  "name": "strap",
+  "module": "index.ts",
+  "version": "1.0.1",
+  "devDependencies": {
+    "bun-types": "^0.2.0"
+  },
+  "dependencies": {
+    "@types/argparse": "^2.0.10",
+    "argparse": "^2.0.1",
+    "log-symbols": "^5.1.0",
+    "sscolors": "^1.0.4",
+    "ts-command-line-args": "^2.3.1"
+  }
+}
