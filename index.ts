@@ -29,11 +29,20 @@ const handleArg = (arg: any, index:any) => {
         if(
             arg.type === "nf"
         ) {
+            if (arg.requiresData) {
+                arg.action(argc[argc.indexOf(arg.aliases[0]) + 1])
+            }
+            else {
+                arg.action()
+            }
+            
             console.log(argc[argc.indexOf(arg.aliases[0]) + 1])
         }
         // attempt to execute action
         else {
-            arg.action()
+            
+                arg.action()
+            
         }
         
     }

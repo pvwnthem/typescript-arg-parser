@@ -1,5 +1,5 @@
 import color from 'sscolors'
-import {argparse} from  '..'
+import {argparse} from  '../index'
 
 import fs from 'fs'
 // open package.json and decode it
@@ -13,7 +13,7 @@ const success = logSymbols.success
 const failed = logSymbols.error
 
 
-const pack = fs.readFileSync('package.json')
+const pack = fs.readFileSync('../package.json')
 const decoded = JSON.parse(Buffer.from(pack).toString('utf8'))
 
 class actions {
@@ -55,10 +55,13 @@ class actions {
             console.log(color.bold(color.blue(failed + ` Bun Not Installed 😔`)))
         }
     }
-    static method() {
-
+    static method(data: any) {
+        console.log('thas tha method')
     }
 }
+
+
+
 
 const optionDefinitions = 
 [
@@ -103,6 +106,7 @@ const optionDefinitions =
         action: actions.method,
         description: "Display the method of Strap.",
         args: "test: string",
+        wantsData: true,
         type: "nf"
     }
     
