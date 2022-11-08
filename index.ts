@@ -24,8 +24,9 @@ const failed = logSymbols.error
 
 
 //handleArg function
-const handleArg = (arg: any, index:any) => {
+const handleArg = (arg: any, index: number) => {
     try{
+        
         if(
             arg.type === "nf"
         ) {
@@ -67,7 +68,7 @@ export default function (optionDefinitions: any){
             {
                 if(arg.startsWith('-')) {
                     // for each option defined
-                optionDefinitions.forEach((definition: any, index:any) => {
+                optionDefinitions.forEach((definition: any, index:number) => {
                     if(definition) {
                         // if the option is found
 
@@ -87,7 +88,7 @@ export default function (optionDefinitions: any){
     }
     else {
         //same but no forEach arg
-        optionDefinitions.forEach((definition: any, index:any) => {
+        optionDefinitions.forEach((definition: any, index:number) => {
             if(definition) {
                 
                 if(definition.aliases.includes(String(argc).replace(/[\[\]']+/g,''))) {
