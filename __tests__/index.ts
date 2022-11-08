@@ -56,7 +56,7 @@ class actions {
         }
     }
     static method(data: any) {
-        console.log('thas tha method')
+        console.log('thas tha method', data)
     }
 }
 

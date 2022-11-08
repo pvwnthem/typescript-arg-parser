@@ -29,7 +29,7 @@ const handleArg = (arg: any, index:any) => {
         if(
             arg.type === "nf"
         ) {
-            if (arg.requiresData) {
+            if (arg.wantsData) {
                 arg.action(argc[argc.indexOf(arg.aliases[0]) + 1])
             }
             else {
