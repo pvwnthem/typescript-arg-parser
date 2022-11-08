@@ -1,5 +1,5 @@
 import color from 'sscolors'
-import {argparse} from  '../index'
+import argparse from  '../index'
 
 import fs from 'fs'
 // open package.json and decode it
@@ -47,12 +47,12 @@ class actions {
 
     }
     static version() {
-        console.log(color.bold(color.blue(success + ` Strap version ${color.italic(color.magenta(decoded.version))}`)))
-        console.log(color.bold(color.blue(success + ` Node version ${color.italic(color.magenta(process.version))}`)))
+        console.log(color.bold(color.blue(` Strap version ${color.italic(color.magenta(decoded.version))}`)))
+        console.log(color.bold(color.blue(` Node version ${color.italic(color.magenta(process.version))}`)))
         if (JSON.stringify(process.versions).includes('bun')) {
-            console.log(color.bold(color.blue(success + ` Bun version ${color.italic(color.magenta(process.versions.bun))}`)))
+            console.log(color.bold(color.blue(` Bun version ${color.italic(color.magenta(process.versions.bun))}`)))
         } else {
-            console.log(color.bold(color.blue(failed + ` Bun Not Installed 😔`)))
+            console.log(color.bold(color.red(` Bun Not Installed 😔`)))
         }
     }
     static method(data: any) {

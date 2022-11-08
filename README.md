@@ -99,12 +99,12 @@ if you want the data after the flag to be passed into your option as a parameter
     class actions {
     
     static version() {
-        console.log(color.bold(color.blue(success + ` Strap version ${color.italic(color.magenta(decoded.version))}`)))
-        console.log(color.bold(color.blue(success + ` Node version ${color.italic(color.magenta(process.version))}`)))
+        console.log(color.bold(color.blue(` Strap version ${color.italic(color.magenta(decoded.version))}`)))
+        console.log(color.bold(color.blue(` Node version ${color.italic(color.magenta(process.version))}`)))
         if (JSON.stringify(process.versions).includes('bun')) {
-            console.log(color.bold(color.blue(success + ` Bun version ${color.italic(color.magenta(process.versions.bun))}`)))
+            console.log(color.bold(color.blue(` Bun version ${color.italic(color.magenta(process.versions.bun))}`)))
         } else {
-            console.log(color.bold(color.blue(failed + ` Bun Not Installed 😔`)))
+            console.log(color.bold(color.red(` Bun Not Installed 😔`)))
         }
     }
     static method(data: any) {
@@ -168,4 +168,12 @@ static help() {
         action: actions.help
         
     },
+```
+
+# Finally,
+
+Add the function below your options and actions and call the function
+
+```javascript
+    argparse(optionDefinitions)
 ```

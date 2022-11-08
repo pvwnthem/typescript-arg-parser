@@ -59,7 +59,7 @@ const handleArg = (arg: any, index:any) => {
 
 // take the list of argvs and remove the default node args, seperating only the user args
 let argc = argv.splice(2, argv.length)
-export const argparse = (optionDefinitions: any) => {
+export default function (optionDefinitions: any){
     // if there is more than one argument
     if (argc.length > 1) {
         // for each args
