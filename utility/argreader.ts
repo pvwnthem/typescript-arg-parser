@@ -32,6 +32,9 @@ class actions {
             console.log(color.bold(color.blue(failed + ` Bun Not Installed 😔`)))
         }
     }
+    static method() {
+
+    }
 }
 
 // setup argument options
@@ -56,14 +59,39 @@ const optionDefinitions =
         ], 
         action: actions.version
         
+    },
+    {
+        name: "method",
+        aliases: [
+            "-m", "--method"
+        ],
+        action: actions.method,
+        type: "nf"
+    },
+    {
+        name: "x",
+        aliases: [
+            "-x", "--x"
+        ],
+        action: actions.method,
+        type: "nf"
     }
+    
 ]
 
 //handleArg function
-const handleArg = (arg: any) => {
+const handleArg = (arg: any, index:any) => {
     try{
+        if(
+            arg.type === "nf"
+        ) {
+            console.log(argc[argc.indexOf(arg.aliases[0]) + 1])
+        }
         // attempt to execute action
-        arg.action()
+        else {
+            arg.action()
+        }
+        
     }
     catch(err) {
         // if the error is because the user hasnt specified an action then return that to them
@@ -84,19 +112,23 @@ const commandLineArgs = () => {
         // for each args
         argc.forEach(arg => 
             {
-                // for each option defined
+                if(arg.startsWith('-')) {
+                    // for each option defined
                 optionDefinitions.forEach((definition: any, index:any) => {
                     if(definition) {
                         // if the option is found
 
                         // if the formatted aliases of the option include one of the user args, then handleArg and attempt to execute the action
                         if(definition.aliases.includes(String(arg).replace(/[\[\]']+/g,''))) {
-                            handleArg(definition)
+                            handleArg(definition, index)
                         }
                     }
                     return  
             
                 })
+                }
+                else {}
+                
 
             })
     }
@@ -106,7 +138,7 @@ const commandLineArgs = () => {
             if(definition) {
                 
                 if(definition.aliases.includes(String(argc).replace(/[\[\]']+/g,''))) {
-                    handleArg(definition)
+                    handleArg(definition, index)
                 }
             }
             return  
