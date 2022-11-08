@@ -66,19 +66,7 @@ class actions {
 const optionDefinitions = 
 [
     
-   {
-    // name of the option
-    name: "help",
-    // aliases for the option
-        aliases: [
-            "-h", "--help"
-        ],
-        // description of the option
-        description: "Display this help message.",
-        // the action to execute when the option is present
-        action: actions.help
-        
-    },
+   
     {
         name: "version",
         aliases: [

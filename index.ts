@@ -62,12 +62,41 @@ const handleArg = (arg: any, index: number) => {
 const argc = argv.splice(2, argv.length)
 export default function (optionDefinitions: any){
     // if there is more than one argument
-    if (argc.length > 1) {
+    if (argc.length > 0) {
         // for each args
         argc.forEach(arg => 
             {
                 if(arg.startsWith('-')) {
                     // for each option defined
+                    if (arg.startsWith('-h') || arg.startsWith('--help')) {
+                        optionDefinitions.forEach((arg: any) => {
+                            if (arg) {
+                                if(arg.args) {
+                                    console.log(
+                                        color.bold(
+                                            
+                                            `${color.magenta(arg.name)}, ${color.green('takes arguments')}- ${color.cyan(arg.args)}`
+                                            
+                                        ),
+                                        color.underline(
+                                            ` ${arg.description}`
+                                        )
+                                    )
+                                } else {
+                                    console.log(
+                                        color.bold(
+                                            `${color.magenta(arg.name)}, ${color.red('takes no arguments')}`
+                                        ),
+                                        color.underline(
+                                            ` ${arg.description}`
+                                        )
+                                    )
+                                }
+                            
+                            }
+                        })
+                    }
+                    else {
                 optionDefinitions.forEach((definition: any, index:number) => {
                     if(definition) {
                         // if the option is found
@@ -80,25 +109,14 @@ export default function (optionDefinitions: any){
                     return  
             
                 })
+            }
                 }
                 else {}
                 
 
             })
     }
-    else {
-        //same but no forEach arg
-        optionDefinitions.forEach((definition: any, index:number) => {
-            if(definition) {
-                
-                if(definition.aliases.includes(String(argc).replace(/[\[\]']+/g,''))) {
-                    handleArg(definition, index)
-                }
-            }
-            return  
     
-        })
-    }
     
 
 
