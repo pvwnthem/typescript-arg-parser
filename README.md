@@ -90,3 +90,82 @@ if you want the data after the flag to be passed into your option as a parameter
     
 ]
 ```
+
+## Actions
+
+#### Actions should be setup as a class with functions newsted inside, below is an example
+
+```javascript
+    class actions {
+    
+    static version() {
+        console.log(color.bold(color.blue(success + ` Strap version ${color.italic(color.magenta(decoded.version))}`)))
+        console.log(color.bold(color.blue(success + ` Node version ${color.italic(color.magenta(process.version))}`)))
+        if (JSON.stringify(process.versions).includes('bun')) {
+            console.log(color.bold(color.blue(success + ` Bun version ${color.italic(color.magenta(process.versions.bun))}`)))
+        } else {
+            console.log(color.bold(color.blue(failed + ` Bun Not Installed 😔`)))
+        }
+    }
+    static method(data: any) {
+        console.log('thas tha method', data)
+    }
+}
+```
+
+
+Functions inside can be used with actions.{function}
+
+# Help commands are optional but highly recommended
+
+
+## help command
+
+We encourage you to make your own help command but if you cant or don't want to, here is a simple examples
+
+```javascript
+static help() {
+        optionDefinitions.forEach((arg) => {
+            if (arg) {
+                if(arg.args) {
+                    console.log(
+                        color.bold(
+                            
+                            `${color.magenta(arg.name)}, ${color.green('takes arguments')}- ${color.cyan(arg.args)}`
+                            
+                        ),
+                        color.underline(
+                            ` ${arg.description}`
+                        )
+                    )
+                } else {
+                    console.log(
+                        color.bold(
+                            `${color.magenta(arg.name)}, ${color.red('takes no arguments')}`
+                        ),
+                        color.underline(
+                            ` ${arg.description}`
+                        )
+                    )
+                }
+            
+            }
+        })
+
+    }
+```
+```javascript
+    {
+    // name of the option
+    name: "help",
+    // aliases for the option
+        aliases: [
+            "-h", "--help"
+        ],
+        // description of the option
+        description: "Display this help message.",
+        // the action to execute when the option is present
+        action: actions.help
+        
+    },
+```
