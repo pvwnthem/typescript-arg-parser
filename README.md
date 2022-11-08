@@ -66,19 +66,7 @@ if you want the data after the flag to be passed into your option as a parameter
 
     const optionDefinitions = [
     
-   {
-    // name of the option
-    name: "help",
-    // aliases for the option
-        aliases: [
-            "-h", "--help"
-        ],
-        // description of the option
-        description: "Display this help message.",
-        // the action to execute when the option is present
-        action: actions.help
-        
-    },
+   
     {
         name: "version",
         aliases: [
@@ -129,64 +117,22 @@ if you want the data after the flag to be passed into your option as a parameter
 
 Functions inside can be used with actions.{function}
 
-# Help commands are optional but highly recommended
+# Help commands are built into the parser but are optional
 
 
-## help command
+You can specify if you want a help command or not with the optional help argument in the argparse function
 
-We encourage you to make your own help command but if you cant or don't want to, here is a simple examples
 
-```javascript
-static help() {
-        optionDefinitions.forEach((arg) => {
-            if (arg) {
-                if(arg.args) {
-                    console.log(
-                        color.bold(
-                            
-                            `${color.magenta(arg.name)}, ${color.green('takes arguments')}- ${color.cyan(arg.args)}`
-                            
-                        ),
-                        color.underline(
-                            ` ${arg.description}`
-                        )
-                    )
-                } else {
-                    console.log(
-                        color.bold(
-                            `${color.magenta(arg.name)}, ${color.red('takes no arguments')}`
-                        ),
-                        color.underline(
-                            ` ${arg.description}`
-                        )
-                    )
-                }
-            
-            }
-        })
 
-    }
-```
-```javascript
-    {
-    // name of the option
-    name: "help",
-    // aliases for the option
-        aliases: [
-            "-h", "--help"
-        ],
-        // description of the option
-        description: "Display this help message.",
-        // the action to execute when the option is present
-        action: actions.help
-        
-    },
-```
 
 # Finally,
 
 Add the function below your options and actions and call the function
 
 ```javascript
-    argparse(optionDefinitions)
+    argparse(optionDefinitions, true)
+```
+# if you don't want a help command
+```javascript
+    argparse(optionDefinitions, false)
 ```

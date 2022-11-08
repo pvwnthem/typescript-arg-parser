@@ -17,35 +17,7 @@ const pack = fs.readFileSync('../package.json')
 const decoded = JSON.parse(Buffer.from(pack).toString('utf8'))
 
 class actions {
-    static help() {
-        optionDefinitions.forEach((arg) => {
-            if (arg) {
-                if(arg.args) {
-                    console.log(
-                        color.bold(
-                            
-                            `${color.magenta(arg.name)}, ${color.green('takes arguments')}- ${color.cyan(arg.args)}`
-                            
-                        ),
-                        color.underline(
-                            ` ${arg.description}`
-                        )
-                    )
-                } else {
-                    console.log(
-                        color.bold(
-                            `${color.magenta(arg.name)}, ${color.red('takes no arguments')}`
-                        ),
-                        color.underline(
-                            ` ${arg.description}`
-                        )
-                    )
-                }
-            
-            }
-        })
-
-    }
+    
     static version() {
         console.log(color.bold(color.blue(` Strap version ${color.italic(color.magenta(decoded.version))}`)))
         console.log(color.bold(color.blue(` Node version ${color.italic(color.magenta(process.version))}`)))
@@ -101,4 +73,4 @@ const optionDefinitions =
 ]
 
 
-argparse(optionDefinitions)
+argparse(optionDefinitions, true)

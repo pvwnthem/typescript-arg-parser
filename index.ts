@@ -60,7 +60,7 @@ const handleArg = (arg: any, index: number) => {
 
 // take the list of argvs and remove the default node args, seperating only the user args
 const argc = argv.splice(2, argv.length)
-export default function (optionDefinitions: any){
+export default function (optionDefinitions: any, helpcommand: boolean){
     // if there is more than one argument
     if (argc.length > 0) {
         // for each args
@@ -68,34 +68,49 @@ export default function (optionDefinitions: any){
             {
                 if(arg.startsWith('-')) {
                     // for each option defined
-                    if (arg.startsWith('-h') || arg.startsWith('--help')) {
-                        optionDefinitions.forEach((arg: any) => {
-                            if (arg) {
-                                if(arg.args) {
-                                    console.log(
-                                        color.bold(
-                                            
-                                            `${color.magenta(arg.name)}, ${color.green('takes arguments')}- ${color.cyan(arg.args)}`
-                                            
-                                        ),
-                                        color.underline(
-                                            ` ${arg.description}`
+                    if (helpcommand) {
+                        if (arg.startsWith('-h') || arg.startsWith('--help')) {
+                            console.log(
+                                color.bold(
+                                    `${color.magenta("help")}, ${color.red('takes no arguments')}`
+                                ),
+                                color.underline(
+                                    ` Display this help command`
+                                )
+                            )
+                            optionDefinitions.forEach((arg: any) => {
+                                if (arg) {
+                                    if(arg.args) {
+                                        console.log(
+                                            color.bold(
+                                                
+                                                `${color.magenta(arg.name)}, ${color.green('takes arguments')}- ${color.cyan(arg.args)}`
+                                                
+                                            ),
+                                            color.underline(
+                                                ` ${arg.description}`
+                                            )
                                         )
-                                    )
-                                } else {
-                                    console.log(
-                                        color.bold(
-                                            `${color.magenta(arg.name)}, ${color.red('takes no arguments')}`
-                                        ),
-                                        color.underline(
-                                            ` ${arg.description}`
+                                    } else {
+                                        console.log(
+                                            color.bold(
+                                                `${color.magenta(arg.name)}, ${color.red('takes no arguments')}`
+                                            ),
+                                            color.underline(
+                                                ` ${arg.description}`
+                                            )
                                         )
-                                    )
+                                    }
+                                
                                 }
-                            
-                            }
-                        })
+                            })
+                        }
+                    } if(!helpcommand) {
+                        if (arg.startsWith('-h') || arg.startsWith('--help')) {
+                            console.log(color.bold(color.red('No help command available')))
+                        }
                     }
+                    
                     else {
                 optionDefinitions.forEach((definition: any, index:number) => {
                     if(definition) {
