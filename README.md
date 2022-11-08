@@ -19,6 +19,16 @@ this is the description of the option(will be displayed in the help command)
 action: function 
 this is the function that will be called when the option is activated 
 
+
+#### Type !!!IMPORTANT!!!
+type    (optional): string
+if you want the flag to take in data typed after it (EX: --host {data} ) you should specify the type as "nf" stating that this option will take in data
+
+args: string
+if you want the flag to take in data, you should specify what data it takes in here and the type of the data (will be displayed in the help command)
+EX: "host: number"
+
+
 ```javascript
     {
     // name of the option
@@ -35,6 +45,7 @@ this is the function that will be called when the option is activated
     }
 ```
 
+## Example
 ```javascript
     //define the arguments for the parser to look for and thier coorosponding actions
 
@@ -78,7 +89,7 @@ this is the function that will be called when the option is activated
             "-x", "--x"
         ],
         action: actions.method,
-        description: "Display the method of Strap.",
+        description: "test",
         args: "test: string",
         type: "nf"
     }
