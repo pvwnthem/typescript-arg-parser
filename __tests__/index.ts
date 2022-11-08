@@ -1,11 +1,11 @@
 import color from 'sscolors'
-import {argparse} from  '../utility/argreader'
+import {argparse} from  '..'
 
 import fs from 'fs'
 // open package.json and decode it
 
 // import icons
-import logSymbols from '../utility/icons'
+import logSymbols from '../icons'
 
 
 // initialize icon variables
