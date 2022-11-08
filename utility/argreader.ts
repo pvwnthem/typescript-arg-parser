@@ -21,7 +21,33 @@ const failed = logSymbols.error
 // setup action function class
 class actions {
     static help() {
-        console.log(color.green('help has arrived!'))
+        optionDefinitions.forEach((arg) => {
+            if (arg) {
+                if(arg.args) {
+                    console.log(
+                        color.bold(
+                            
+                            `${color.magenta(arg.name)}, ${color.green('takes arguments')}- ${color.cyan(arg.args)}`
+                            
+                        ),
+                        color.underline(
+                            ` ${arg.description}`
+                        )
+                    )
+                } else {
+                    console.log(
+                        color.bold(
+                            `${color.magenta(arg.name)}, ${color.red('takes no arguments')}`
+                        ),
+                        color.underline(
+                            ` ${arg.description}`
+                        )
+                    )
+                }
+            
+            }
+        })
+
     }
     static version() {
         console.log(color.bold(color.blue(success + ` Strap version ${color.italic(color.magenta(decoded.version))}`)))
@@ -48,6 +74,8 @@ const optionDefinitions =
         aliases: [
             "-h", "--help"
         ],
+        // description of the option
+        description: "Display this help message.",
         // the action to execute when the option is present
         action: actions.help
         
@@ -57,6 +85,7 @@ const optionDefinitions =
         aliases: [
             "-v", "--version"
         ], 
+        description: "Display the version of Strap.",
         action: actions.version
         
     },
@@ -66,6 +95,8 @@ const optionDefinitions =
             "-m", "--method"
         ],
         action: actions.method,
+        description: "Display the method of Strap.",
+        args: "test: string",
         type: "nf"
     },
     {
@@ -74,6 +105,8 @@ const optionDefinitions =
             "-x", "--x"
         ],
         action: actions.method,
+        description: "Display the method of Strap.",
+        args: "test: string",
         type: "nf"
     }
     
