@@ -73,20 +73,11 @@ EX: "host: number"
         action: actions.version
         
     },
+    
     {
-        name: "method",
+        name: "test",
         aliases: [
-            "-m", "--method"
-        ],
-        action: actions.method,
-        description: "Display the method of Strap.",
-        args: "test: string",
-        type: "nf"
-    },
-    {
-        name: "x",
-        aliases: [
-            "-x", "--x"
+            "-test", "--test"
         ],
         action: actions.method,
         description: "test",
