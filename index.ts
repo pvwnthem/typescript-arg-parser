@@ -3,6 +3,11 @@
 const argv = process.argv
 // imports
 
+
+
+// initialize icon variables
+import packagejs from '../package.json'
+
 import color from 'sscolors'
 
 import fs from 'fs'
@@ -68,6 +73,15 @@ export default function (optionDefinitions: any, helpcommand: boolean){
             {
                 if(arg.startsWith('-')) {
                     // for each option defined
+                    if (arg.startsWith('-v') || arg.startsWith('--version')) {
+                        console.log(color.bold(color.blue(` ${packagejs.name} version ${color.italic(color.magenta(packagejs.version))}`)))
+        console.log(color.bold(color.blue(` Node version ${color.italic(color.magenta(process.version))}`)))
+        if (JSON.stringify(process.versions).includes('bun')) {
+            console.log(color.bold(color.blue(` Bun version ${color.italic(color.magenta(process.versions.bun))}`)))
+        } else {
+            console.log(color.bold(color.red(` Bun Not Installed 😔`)))
+        }
+                    }
                     if (helpcommand) {
                         if (arg.startsWith('-h') || arg.startsWith('--help')) {
                             console.log(
@@ -76,6 +90,14 @@ export default function (optionDefinitions: any, helpcommand: boolean){
                                 ),
                                 color.underline(
                                     ` Display this help command`
+                                )
+                            )
+                            console.log(
+                                color.bold(
+                                    `${color.magenta("version")}, ${color.red('takes no arguments')}`
+                                ),
+                                color.underline(
+                                    ` Display the version of ${packagejs.name}`
                                 )
                             )
                             optionDefinitions.forEach((arg: any) => {
