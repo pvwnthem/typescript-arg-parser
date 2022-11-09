@@ -4,9 +4,8 @@ const argv = process.argv
 // imports
 
 
-
 // initialize icon variables
-import packagejs from '../package.json'
+import packagejs from './package.json'
 
 import color from 'sscolors'
 
@@ -20,6 +19,8 @@ import logSymbols from './icons'
 // initialize icon variables
 const success = logSymbols.success
 const failed = logSymbols.error
+const warning = logSymbols.warning
+
 
 
 // setup action function class
@@ -36,13 +37,20 @@ const handleArg = (arg: any, index: number) => {
             arg.type === "nf"
         ) {
             if (arg.wantsData) {
-                arg.action(argc[argc.indexOf(arg.aliases[0]) + 1])
+                if (argc[argc.indexOf(arg.aliases[0]) + 1] === undefined) {
+                    console.log(color.bold(color.red(`${failed} argument ${argc[argc.indexOf(arg.aliases[0])]} requires data`)))
+
+                    
+                }
+                else {
+                    arg.action(argc[argc.indexOf(arg.aliases[0]) + 1])
+                }
+                
             }
             else {
                 arg.action()
             }
             
-            console.log(argc[argc.indexOf(arg.aliases[0]) + 1])
         }
         // attempt to execute action
         else {
@@ -65,7 +73,7 @@ const handleArg = (arg: any, index: number) => {
 
 // take the list of argvs and remove the default node args, seperating only the user args
 const argc = argv.splice(2, argv.length)
-export default function (optionDefinitions: any, helpcommand: boolean){
+export default function (optionDefinitions: any, helpcommand: boolean , packagejson?: any){
     // if there is more than one argument
     if (argc.length > 0) {
         // for each args
@@ -73,15 +81,19 @@ export default function (optionDefinitions: any, helpcommand: boolean){
             {
                 if(arg.startsWith('-')) {
                     // for each option defined
-                    if (arg.startsWith('-v') || arg.startsWith('--version')) {
-                        console.log(color.bold(color.blue(` ${packagejs.name} version ${color.italic(color.magenta(packagejs.version))}`)))
-        console.log(color.bold(color.blue(` Node version ${color.italic(color.magenta(process.version))}`)))
-        if (JSON.stringify(process.versions).includes('bun')) {
-            console.log(color.bold(color.blue(` Bun version ${color.italic(color.magenta(process.versions.bun))}`)))
-        } else {
-            console.log(color.bold(color.red(` Bun Not Installed 😔`)))
+                    if (packagejson) {
+                        if (arg.startsWith('-v') || arg.startsWith('--version')) {
+                            console.log(color.bold(color.blue(` ${packagejson.name} version ${color.italic(color.magenta(packagejson.version))}`)))
+        
+                        }
+                    }
+                    else {
+                        if (arg.startsWith('-v') || arg.startsWith('--version')) {
+                            console.log(color.red(color.bold("Unavalible | No package.json argument passed")))
+            
         }
                     }
+                    
                     if (helpcommand) {
                         if (arg.startsWith('-h') || arg.startsWith('--help')) {
                             console.log(
@@ -97,7 +109,7 @@ export default function (optionDefinitions: any, helpcommand: boolean){
                                     `${color.magenta("version")}, ${color.red('takes no arguments')}`
                                 ),
                                 color.underline(
-                                    ` Display the version of ${packagejs.name}`
+                                    ` Display the version of ${packagejson.name}`
                                 )
                             )
                             optionDefinitions.forEach((arg: any) => {
@@ -134,21 +146,34 @@ export default function (optionDefinitions: any, helpcommand: boolean){
                     }
                     
                     else {
+                        let found = false
                 optionDefinitions.forEach((definition: any, index:number) => {
                     if(definition) {
                         // if the option is found
 
                         // if the formatted aliases of the option include one of the user args, then handleArg and attempt to execute the action
                         if(definition.aliases.includes(String(arg).replace(/[\[\]']+/g,''))) {
+                            found = true;
                             handleArg(definition, index)
                         }
+                        
+                        
                     }
+                    
+                    
                     return  
             
                 })
+                if (!found && !arg.startsWith("-h") && !arg.startsWith("--help") && !arg.startsWith("-v") && !arg.startsWith("--version")) {
+                             
+                    console.log(color.yellow(color.bold(warning)), color.yellow(color.italic(`argument ${String(arg).replace(/[\[\]']+/g,'')} invalid`)))
+                
+            }
             }
                 }
-                else {}
+                else {
+                    
+                }
                 
 
             })
