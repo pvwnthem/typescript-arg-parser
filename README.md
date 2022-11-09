@@ -127,12 +127,48 @@ You can specify if you want a help command or not with the optional help argumen
 
 # Finally,
 
+
+
+
+
+
+## Version command
+
+```
+    add `"resolveJsonModule": true,` to the tsconfig.json
+```
+
+
+```javascript
+    import * as pj from './package.json';
+
+
+
+```
+
+
+
 Add the function below your options and actions and call the function
 
 ```javascript
-    argparse(optionDefinitions, true)
+    argparse(optionDefinitions, true, pj)
 ```
+
+
+
+
+# arg structure of main function
+
+```
+    argparse(yourOptions, help command(true or false), your package.json if you want a version command)
+```
+
+
+
+
+
+
 # if you don't want a help command
 ```javascript
-    argparse(optionDefinitions, false)
+    argparse(optionDefinitions, false , pj)
 ```
