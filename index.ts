@@ -22,6 +22,16 @@ const failed = logSymbols.error
 const warning = logSymbols.warning
 
 
+export type options = {
+    name: string,
+    aliases: string[],
+    description: string,
+    action: void,
+    type?: string,
+    wantsData?: boolean,
+    args?: string
+
+}
 
 // setup action function class
 
@@ -73,7 +83,7 @@ const handleArg = (arg: any, index: number) => {
 
 // take the list of argvs and remove the default node args, seperating only the user args
 const argc = argv.splice(2, argv.length)
-export default function (optionDefinitions: any, helpcommand: boolean , packagejson?: any){
+export default function (optionDefinitions: options[], helpcommand: boolean , packagejson?: any){
     // if there is more than one argument
     if (argc.length > 0) {
         // for each args
