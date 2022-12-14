@@ -1,7 +1,7 @@
 {
   "name": "ts-argparser",
   "module": "index.ts",
-  "version": "1.2.01",
+  "version": "1.2.2",
   "repository": "https://github.com/pvwnthem/typescript-arg-parser",
   "devDependencies": {
     "bun-types": "^0.2.0"

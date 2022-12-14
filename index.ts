@@ -107,14 +107,27 @@ export default function (optionDefinitions: options[], helpcommand: boolean , pa
                                     ` Display this help command`
                                 )
                             )
-                            console.log(
-                                color.bold(
-                                    `${color.magenta("version")}, ${color.red('takes no arguments')}`
-                                ),
-                                color.underline(
-                                    ` Display the version of ${packagejson.name}`
+                            if (!packagejson) {
+                                console.log(
+                                    color.bold(
+                                        `${color.magenta("version")}, ${color.red('takes no arguments')}`
+                                    ),
+                                    color.underline(
+                                        ` Display the version of the program`
+                                    )
+                                )   
+                            }
+                            else {
+                                console.log(
+                                    color.bold(
+                                        `${color.magenta("version")}, ${color.red('takes no arguments')}`
+                                    ),
+                                    color.underline(
+                                        ` Display the version of ${packagejson.name}`
+                                    )
                                 )
-                            )
+                            }
+                            
                             optionDefinitions.forEach((arg: any) => {
                                 if (arg) {
                                     if(arg.args) {
