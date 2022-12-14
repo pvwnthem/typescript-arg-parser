@@ -43,9 +43,7 @@ export type options = {
 const handleArg = (arg: any, index: number) => {
     try{
         
-        if(
-            arg.type === "nf"
-        ) {
+        
             if (arg.wantsData) {
                 if (argc[argc.indexOf(arg.aliases[0]) + 1] === undefined) {
                     console.log(color.bold(color.red(`${failed} argument ${argc[argc.indexOf(arg.aliases[0])]} requires data`)))
@@ -61,14 +59,9 @@ const handleArg = (arg: any, index: number) => {
                 arg.action()
             }
             
-        }
-        // attempt to execute action
-        else {
-            
-                arg.action()
-            
-        }
         
+        // attempt to execute action
+       
     }
     catch(err) {
         // if the error is because the user hasnt specified an action then return that to them
