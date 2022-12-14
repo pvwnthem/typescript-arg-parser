@@ -26,7 +26,7 @@ export type options = {
     name: string,
     aliases: string[],
     description: string,
-    action: void,
+    action: (data?: any) => void,
     type?: string,
     wantsData?: boolean,
     args?: string
@@ -155,7 +155,7 @@ export default function (optionDefinitions: options[], helpcommand: boolean , pa
                         }
                     }
                     
-                    else {
+                    if (arg){
                         let found = false
                 optionDefinitions.forEach((definition: any, index:number) => {
                     if(definition) {
