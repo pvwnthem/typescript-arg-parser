@@ -27,11 +27,10 @@ export type options = {
     aliases: string[],
     description: string,
     action: (data?: any) => void,
-    type?: string,
     wantsData?: boolean,
     args?: string
 
-}
+}[]
 
 // setup action function class
 
@@ -76,7 +75,7 @@ const handleArg = (arg: any, index: number) => {
 
 // take the list of argvs and remove the default node args, seperating only the user args
 const argc = argv.splice(2, argv.length)
-export default function (optionDefinitions: options[], helpcommand: boolean , packagejson?: any){
+export default function (optionDefinitions: options, helpcommand: boolean , packagejson?: any){
     // if there is more than one argument
     if (argc.length > 0) {
         // for each args
